@@ -9,7 +9,7 @@ The user will also be able to add new items to their collection by providing the
 desired condition (loose, complete in box, or individual items).
 
 The scheduled job will run using Apache Airflow via Google Cloud Composer. The collection addition feature 
-will utilize App Engine to handle requests.
+will be done by reading in new CSV files uploaded to Google Clod Storage.
 
 ## Project Updates
 
