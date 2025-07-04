@@ -15,3 +15,7 @@ will be done by reading in new CSV files uploaded to Google Cloud Storage.
 
 ### June 20, 2025
 - Project Repo created. Wrote first draft of README.
+
+### July 4, 2025
+- Testing out requests to Pricecharting.com.
+- Testing out extracting prices from HTML.
