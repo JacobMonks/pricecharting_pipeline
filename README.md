@@ -19,3 +19,6 @@ will be done by reading in new CSV files uploaded to Google Cloud Storage.
 ### July 4, 2025
 - Testing out requests to Pricecharting.com.
 - Testing out extracting prices from HTML.
+
+### July 12, 2025
+- Setting up Airflow and Docker environments.
