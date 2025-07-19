@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta
+import logging
+from datetime import datetime
 from airflow.decorators import dag, task
 
 
@@ -8,14 +9,13 @@ from airflow.decorators import dag, task
         schedule="0 10 * * 0",
         tags=["sunday", "weekly"],
         catchup=False,
-        retry_delay=timedelta(minutes=5),
         default_args={"retries": 2, "owner": "Jacob"}
 )
 def refresh_collection():
 
     @task()
     def dummy_task(**kwargs):
-        pass
+        logging.info("Example Task Complete")
 
     dummy_task()
 
