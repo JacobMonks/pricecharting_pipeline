@@ -25,3 +25,7 @@ will be done by reading in new CSV files uploaded to Google Cloud Storage.
 
 ### July 19, 2025
 - Running Airflow in Docker.
+
+### July 28, 2025
+- Created gitignore.
+- Tested local MySQL database connection.
