@@ -1,6 +1,6 @@
 import os.path
 import pandas as pd
-from private_constants import Constants
+from constants import Constants
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -29,7 +29,7 @@ def get_google_sheet_data(range: str):
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                "./dags/data/credentials.json", SCOPES
+                "credentials.json", SCOPES
             )
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
@@ -68,7 +68,6 @@ def process_data_into_rows(raw_data):
         if raw_data.empty:
             raise ValueError("No data was found.")
 
-        print(f"Raw Sheet Data: \n {raw_data}")
         print("Converting raw data into rows...")
 
         for index, row in raw_data.iterrows():
@@ -94,7 +93,7 @@ def mysql_google_sheet_migration(data: list):
             port=3306,
             database="pricecharting",
             user="root",
-            password=""
+            password=""  # Insert password when connecting locally.
         )
         cursor = conn.cursor()
 
@@ -127,11 +126,10 @@ def mysql_google_sheet_migration(data: list):
             query += new_row
 
         query = query[:query.rindex(")")+1]
-        print(query)
         cursor.execute(query)
 
         conn.commit()
-        print(f"Row(s) were updated: {str(cursor.rowcount)}")
+        print(f"Row(s) were updated for {game_system}: {str(cursor.rowcount)}")
 
         cursor.close()
         conn.close()
