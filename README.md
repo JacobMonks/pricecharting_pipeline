@@ -13,19 +13,22 @@ will be done by reading in new CSV files uploaded to Google Cloud Storage.
 
 ## Project Updates
 
-### June 20, 2025
+*June 20, 2025*
 - Project Repo created. Wrote first draft of README.
 
-### July 4, 2025
+*July 4, 2025*
 - Testing out requests to Pricecharting.com.
 - Testing out extracting prices from HTML.
 
-### July 12, 2025
+*July 12, 2025*
 - Setting up Airflow and Docker environments.
 
-### July 19, 2025
+*July 19, 2025*
 - Running Airflow in Docker.
 
-### July 28, 2025
+*July 28, 2025*
 - Created gitignore.
 - Tested local MySQL database connection.
+
+*August 2, 2025*
+- SQL table populated using new script.
