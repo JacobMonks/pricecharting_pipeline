@@ -1,3 +1,4 @@
 ./logs/dag_processor/
 ./data/
 ./dags/src/private_constants.py
+./token.json
