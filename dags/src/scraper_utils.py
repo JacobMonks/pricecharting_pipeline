@@ -36,6 +36,8 @@ def extract_prices(text, url, invalid_urls=[]):
 
     Args
     - text: The response text.
+    - url: The request URL.
+    - invalid_urls: A list of URLs that retuned invalid results.
 
     Returns
     A dictionary containing the pricing info.
