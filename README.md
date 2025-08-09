@@ -32,3 +32,7 @@ will be done by reading in new CSV files uploaded to Google Cloud Storage.
 
 *August 2, 2025*
 - SQL table populated using new script.
+
+*August 9, 2025*
+- Created MySQL local connection functionto return specified table results.
+- Created main file for running all functions locally.

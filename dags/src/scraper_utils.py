@@ -1,8 +1,11 @@
+import json
 import requests
 from bs4 import BeautifulSoup
 
-urls = ["https://www.pricecharting.com/game/playstation-2/xenosaga-3",
-        # "https://www.pricecharting.com/game/xbox-360/need-for-speed-carbon"
+urls = [
+        "https://www.pricecharting.com/game/playstation-2/xenosaga-episode-iii",
+        "https://www.pricecharting.com/game/playstation-2/xenosaga-3",
+        "https://www.pricecharting.com/game/xbox-360/need-for-speed-carbon"
         ]
 
 conditions = ["Complete"]
@@ -27,7 +30,7 @@ def get_request(url):
     return response.text
 
 
-def extract_prices(text):
+def extract_prices(text, url, invalid_urls=[]):
     """
     Extracts and cleans up price table data from response.
 
@@ -39,11 +42,15 @@ def extract_prices(text):
     """
     price_guide = None
     try:
+        if "Your search for" in text:
+            invalid_urls.append(url)
+            raise ValueError(f"Landed on search page, URL invalid: {url}.")
+
         soup = BeautifulSoup(text, "html.parser")
         price_table = soup.find_all(id="full-prices")
 
         if not price_table:
-            raise ValueError("No prices table could be found.")
+            raise ValueError(f"No prices table could be found for game: {url[url.rindex("/") + 1:]}.")
 
         price_guide = {"Game": price_table[0].h2.get_text().replace("Full Price Guide: ", "")}
 
@@ -62,8 +69,10 @@ def extract_prices(text):
 
 
 if __name__ == "__main__":
+    invalid_urls = []
     for url in urls:
         resp = get_request(url)
-        price_guide = extract_prices(resp)
+        price_guide = extract_prices(resp, url, invalid_urls)
+        print(json.dumps(price_guide, indent=4))
 
-        print(price_guide)
+    print(f"Invalid URLs: {invalid_urls}")
