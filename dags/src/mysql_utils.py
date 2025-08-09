@@ -2,6 +2,17 @@ from mysql import connector
 
 
 def query_no_filter(database_name: str, table_name: str, columns):
+    """
+    Queries all rows from a local database table.
+
+    Args
+    - database_name: The name of the database.
+    - table_name: The name of the table (single or joined with condition).
+    - columns: The columns to query (a list of strings or a single string with comma-separated names).
+
+    Returns
+    A list of dictionaries containing the row data.
+    """
     results = []
     try:
         conn = connector.connect(
