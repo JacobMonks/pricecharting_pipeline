@@ -42,15 +42,15 @@ def extract_prices(text, url, invalid_urls=[]):
     """
     price_guide = None
     try:
-        if "Your search for" in resp:
+        if "Your search for" in text:
             invalid_urls.append(url)
-            raise ValueError("Landed on search page, URL invalid.")
+            raise ValueError(f"Landed on search page, URL invalid: {url}.")
 
         soup = BeautifulSoup(text, "html.parser")
         price_table = soup.find_all(id="full-prices")
 
         if not price_table:
-            raise ValueError(f"No prices table could be found for game with url {url}.")
+            raise ValueError(f"No prices table could be found for game: {url[url.rindex("/") + 1:]}.")
 
         price_guide = {"Game": price_table[0].h2.get_text().replace("Full Price Guide: ", "")}
 

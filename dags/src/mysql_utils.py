@@ -23,7 +23,7 @@ def query_no_filter(database_name: str, table_name: str, columns):
             cols_list = columns.split(',')
             cols = columns
 
-        query_row_sql = f"SELECT {cols} FROM {table_name} limit 10;"
+        query_row_sql = f"SELECT {cols} FROM {table_name};"
         cursor.execute(query_row_sql)
 
         num_cols = len(cols_list)
