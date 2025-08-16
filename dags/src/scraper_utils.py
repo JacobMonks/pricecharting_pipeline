@@ -30,14 +30,13 @@ def get_request(url):
     return response.text
 
 
-def extract_prices(text, url, invalid_urls=[]):
+def extract_prices(text, url):
     """
     Extracts and cleans up price table data from response.
 
     Args
     - text: The response text.
     - url: The request URL.
-    - invalid_urls: A list of URLs that retuned invalid results.
 
     Returns
     A dictionary containing the pricing info.
@@ -45,7 +44,6 @@ def extract_prices(text, url, invalid_urls=[]):
     price_guide = None
     try:
         if "Your search for" in text:
-            invalid_urls.append(url)
             raise ValueError(f"Landed on search page, URL invalid: {url}.")
 
         soup = BeautifulSoup(text, "html.parser")

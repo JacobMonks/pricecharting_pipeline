@@ -36,3 +36,8 @@ will be done by reading in new CSV files uploaded to Google Cloud Storage.
 *August 9, 2025*
 - Created MySQL local connection functionto return specified table results.
 - Created main file for running all functions locally.
+
+*August 16, 2025*
+- Created MySQL table for reporting failed requests.
+- Created function to overwrite failed URLs table.
+- Created interactive CLI for running code locally.
