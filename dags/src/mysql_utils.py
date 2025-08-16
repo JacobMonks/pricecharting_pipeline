@@ -1,4 +1,6 @@
 from mysql import connector
+from sqlalchemy import create_engine
+import pandas as pd
 
 
 def query_no_filter(database_name: str, table_name: str, columns):
@@ -48,6 +50,40 @@ def query_no_filter(database_name: str, table_name: str, columns):
         print("ERROR - ", e)
 
     return results
+
+
+def report_failures(input_data: list):
+    """
+    Overwrites invalid_url MySQL table with currently failing URLs.
+
+    Args:
+    - input_data: a list of dictionaries.
+    """
+    report_df = pd.DataFrame(input_data)
+
+    db_url = "mysql+pymysql://{user}:{password}@{host}/{database}"
+
+    db_url = db_url.format(
+        user="root",
+        password="",
+        host="127.0.0.1:3306",
+        database="pricecharting"
+    )
+
+    sql_engine = create_engine(db_url, pool_recycle=3600)
+    conn = sql_engine.connect()
+
+    try:
+        report_df.to_sql(name="invalid_url", con=conn, if_exists="replace")
+
+    except ValueError as e:
+        print(e)
+
+    except Exception as e:
+        print(f"Ran into a problem - {e}")
+
+    finally:
+        conn.close()
 
 
 if __name__ == "__main__":

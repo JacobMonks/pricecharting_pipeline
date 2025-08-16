@@ -1,5 +1,5 @@
 ./logs/dag_processor/
 ./data/
 ./dags/src/private_constants.py
-**/__pychache__/
+__pychache__/
 **/token.json
