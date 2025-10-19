@@ -98,8 +98,7 @@ if __name__ == "__main__":
                 if invalid_urls:
                     mysql_utils.report_failures(invalid_urls)
                     print("Invalid URL table has been updated.")
-        except Exception as e:
-            print(e)
+        except Exception:
             print("""
                 Sorry, we ran into an issue with that selection.
                 Please select a different option.""")
