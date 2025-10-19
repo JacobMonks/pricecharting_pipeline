@@ -41,3 +41,6 @@ will be done by reading in new CSV files uploaded to Google Cloud Storage.
 - Created MySQL table for reporting failed requests.
 - Created function to overwrite failed URLs table.
 - Created interactive CLI for running code locally.
+
+*October 19, 2025*
+- Updated CLI user interface to handle page scrolling.
