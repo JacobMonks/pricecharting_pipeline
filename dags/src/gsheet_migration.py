@@ -1,6 +1,6 @@
 import os.path
 import pandas as pd
-from constants import Constants
+from dags.src.private_constants import Constants
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -125,7 +125,7 @@ def mysql_google_sheet_migration(data: list):
                                      )
             query += new_row
 
-        query = query[:query.rindex(")")+1]
+        query = query[:query.rindex(")") + 1]
         cursor.execute(query)
 
         conn.commit()

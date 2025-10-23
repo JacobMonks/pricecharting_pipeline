@@ -1,3 +1,4 @@
+import math
 import mysql_utils
 import scraper_utils
 
@@ -20,58 +21,60 @@ if __name__ == "__main__":
             You can update the value of any items in your collection.""")
     page_no = 1
     page_size_limit = 6
+    number_of_pages = math.ceil(len(selection_mapping) / page_size_limit)
     start_of_page = 1
     end_of_page = page_size_limit
     while not exit_program:
         try:
             print("""
-                Which console would you like to have updated prices?
-            """)
+            Which console would you like to have updated prices?""")
             valid_selections = list(range(start_of_page, end_of_page + 4))
-            print(valid_selections)
+            offset = int(valid_selections[0]) - 1
             for num, option in selection_mapping.items():
                 if int(num) in valid_selections[:-3]:
-                    print(f"\t\t{num} : {option}")
+                    print(f"\t\t{int(num) - offset} : {option}")
 
             prev_page, next_page, quit = 0, 0, 0
             if page_no == 1:
                 next_page = end_of_page + 1
                 quit = end_of_page + 2
-            else:
+                print(f"\t\t{next_page - offset} : Next Page")
+                valid_selections.pop()
+            elif page_no != page_size_limit:
                 prev_page = end_of_page + 1
                 next_page = end_of_page + 2
                 quit = end_of_page + 3
-                print(f"\t\t{prev_page} : Previous Page")
+                print(f"\t\t{prev_page - offset} : Previous Page")
+                print(f"\t\t{next_page - offset} : Next Page")
+            else:
+                prev_page = end_of_page + 1
+                quit = end_of_page + 2
+                valid_selections.pop()
+                print(f"\t\t{prev_page - offset} : Previous Page")
+            print(f"\t\t{quit - offset} : Quit")
 
-            print(f"\t\t{next_page} : Next Page")
-            print(f"\t\t{quit} : Quit")
-
-            selection = input("Selection: ")
-            if int(selection) not in valid_selections:
+            selection = int(input("Selection: ")) + offset
+            if selection not in valid_selections:
                 print("Selection was invalid, please make a selection.")
-
-            elif int(selection) == next_page:
+            elif selection == next_page:
                 start_of_page += page_size_limit
                 end_of_page += page_size_limit
                 page_no += 1
-
-            elif int(selection) == prev_page:
+            elif selection == prev_page:
                 start_of_page -= page_size_limit
                 end_of_page -= page_size_limit
                 page_no -= 1
-
-            elif int(selection) == quit:
+            elif selection == quit:
                 print("""
                         Thank you for using this service.
                                 ***Good-bye!***""")
                 exit_program = True
-
             else:
-                print(f"Updating prices for {selection_mapping[selection]}...")
+                print(f"Updating prices for {selection_mapping[str(selection)]}...")
 
                 # Query table for game data (tags for URL and game condition)
                 table = f"""vg_price join console_mapping on game_system = console_name
-                    where console_name = '{selection_mapping[selection]}'"""
+                    where console_name = '{selection_mapping[str(selection)]}'"""
                 games_list = mysql_utils.query_no_filter("pricecharting", table,
                                                          ["game_title", "game_condition", "title_tag", "console_tag"])
 
