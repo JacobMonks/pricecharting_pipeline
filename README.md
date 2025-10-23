@@ -44,3 +44,6 @@ will be done by reading in new CSV files uploaded to Google Cloud Storage.
 
 *October 19, 2025*
 - Updated CLI user interface to handle page scrolling.
+
+*October 23, 2025*
+- Made page scrolling cleaner.
