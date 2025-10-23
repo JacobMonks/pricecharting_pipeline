@@ -2,8 +2,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
-urls = [
-        "https://www.pricecharting.com/game/playstation-2/xenosaga-episode-iii",
+urls = ["https://www.pricecharting.com/game/playstation-2/xenosaga-episode-iii",
         "https://www.pricecharting.com/game/playstation-2/xenosaga-3",
         "https://www.pricecharting.com/game/xbox-360/need-for-speed-carbon"
         ]

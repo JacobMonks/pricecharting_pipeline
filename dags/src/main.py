@@ -21,7 +21,7 @@ if __name__ == "__main__":
             You can update the value of any items in your collection.""")
     page_no = 1
     page_size_limit = 6
-    number_of_pages = math.ceil(len(selection_mapping)/page_size_limit)
+    number_of_pages = math.ceil(len(selection_mapping) / page_size_limit)
     start_of_page = 1
     end_of_page = page_size_limit
     while not exit_program:

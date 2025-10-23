@@ -125,7 +125,7 @@ def mysql_google_sheet_migration(data: list):
                                      )
             query += new_row
 
-        query = query[:query.rindex(")")+1]
+        query = query[:query.rindex(")") + 1]
         cursor.execute(query)
 
         conn.commit()
